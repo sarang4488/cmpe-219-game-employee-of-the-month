@@ -1,16 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Landing from "./components//landing";
+import Landing from "./components/Landing/landing";
 import "./App.css";
+import Main from "./components/main";
 
-function App() {
-  return (
-    <Router>
-      <Switch>
-        {/* <Route exact path="/" component={Landing} /> */}
-      </Switch>
-    </Router>
-  );
+class App extends Component {
+  render() {
+    return <Main />;
+  }
 }
 
 export default App;

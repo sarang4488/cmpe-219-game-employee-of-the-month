@@ -1,0 +1,24 @@
+.backgroundImage {
+  background-image: url("../../assets/images/laptop-secure.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 900px;
+  width: 130%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.playButton {
+  margin-top: 40px;
+  margin-left: 200px;
+  width: 100px;
+}
+
+.introduction {
+  padding-top: 300px;
+  margin-left: 200px;
+  color: rgb(43, 201, 193);
+  font-family: cursive;
+  font-weight: bold;
+}
