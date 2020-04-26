@@ -22,10 +22,15 @@ export default class Main extends Component {
         <Row>
           <Col lg="12">
             <div className="backgroundImage">
-              <h4 className="introduction">
-                Welcome to the Biometrics online games
+              <h4 className="introduction" style={{fontSize:"40px"}}>
+                Welcome to Employee of the month
               </h4>
-              <Button pill theme="success" className="playButton">
+              <Button
+                pill
+                theme="success"
+                className="playButton"
+                onClick={() => this.props.history.push("/room")}
+              >
                 Play
               </Button>
             </div>
