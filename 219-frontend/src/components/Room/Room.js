@@ -5,10 +5,10 @@ import {
   Col,
   Button,
   ButtonGroup,
-  FormInput,
+  FormInput
 } from "shards-react";
 import Avatar from "react-avatar";
-import "./room.css"
+import "./room.css";
 
 export default class Main extends Component {
   constructor(props) {
@@ -18,38 +18,38 @@ export default class Main extends Component {
       players: [
         {
           name: "Sarang Grover",
-          score: 0,
+          score: 0
         },
         {
           name: "Jay Patel",
-          score: 0,
+          score: 0
         },
         {
           name: "Bhaskar Gurram",
-          score: 0,
+          score: 0
         },
         {
           name: "Atul Gutal",
-          score: 0,
-        },
-      ],
+          score: 0
+        }
+      ]
     };
   }
 
-  handleChange = async (e) => {
+  handleChange = async e => {
     await this.setState({
-      playerName: e.target.value,
+      playerName: e.target.value
     });
   };
 
-  handleSubmit = async (e) => {
+  handleSubmit = async e => {
     e.preventDefault();
 
     await this.setState({
       players: [
         ...this.state.players,
-        { name: this.state.playerName, score: 0 },
-      ],
+        { name: this.state.playerName, score: 0 }
+      ]
     });
   };
 
@@ -83,7 +83,7 @@ export default class Main extends Component {
               <FormInput
                 placeholder="Name"
                 className="mb-2"
-                onChange={(e) => this.handleChange(e)}
+                onChange={e => this.handleChange(e)}
               />
             </Col>
           </Row>
@@ -111,7 +111,7 @@ export default class Main extends Component {
                 Players already joined:
               </div>
               <br />
-              {this.state.players.map((player) => {
+              {this.state.players.map(player => {
                 return (
                   <Avatar
                     name={player.name}
@@ -131,8 +131,8 @@ export default class Main extends Component {
               <ButtonGroup size="lg">
                 <Button
                   theme="success"
-                  onClick={() => this.props.history.push("/room")}
-                  style={{marginLeft:"40px"}}
+                  onClick={() => this.props.history.push("/quiz")}
+                  style={{ marginLeft: "40px" }}
                 >
                   Start Game
                 </Button>

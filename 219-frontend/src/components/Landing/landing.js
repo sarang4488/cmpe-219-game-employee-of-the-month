@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "shards-react";
-import Speech from "react-speech";
+// import Speech from "react-speech";
 
 import "./landing.css";
 
@@ -22,7 +22,7 @@ export default class Main extends Component {
         <Row>
           <Col lg="12">
             <div className="backgroundImage">
-              <h4 className="introduction" style={{fontSize:"40px"}}>
+              <h4 className="introduction" style={{ fontSize: "40px" }}>
                 Welcome to Employee of the month
               </h4>
               <Button
