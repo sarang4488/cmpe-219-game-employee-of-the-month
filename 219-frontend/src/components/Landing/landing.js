@@ -21,7 +21,7 @@ export default class Main extends Component {
       >
         <Row>
           <Col lg="12">
-            <div className="backgroundImage">
+            <div className="backgroundImage" style={{ width: "130%" }}>
               <h4 className="introduction" style={{ fontSize: "40px" }}>
                 Welcome to Employee of the month
               </h4>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Timer from "../Timer/Timer";
 import { Navbar, Nav, NavItem, Collapse } from "shards-react";
+import "../Quiz/Quiz.css";
 
 export default class Main extends Component {
   constructor(props) {

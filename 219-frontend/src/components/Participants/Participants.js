@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, ListGroup, ListGroupItem } from "shards-react";
 import Avatar from "react-avatar";
+import "../Quiz/Quiz.css";
 
 export default class Participants extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class Participants extends Component {
       <>
         <ListGroup>
           {this.state.players.map((player, index) => (
-            <ListGroupItem key={index}>
+            <ListGroupItem key={index} className="hide">
               <Avatar
                 name={player.name}
                 size={50}

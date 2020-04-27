@@ -40,7 +40,7 @@ export default class Timer extends Component {
         {minutes === 0 && seconds === 0 ? (
           <h1>Over</h1>
         ) : (
-          <h4 style={{ color: "white" }}>
+          <h4 style={{ color: "white", marginTop: "10px" }}>
             Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
           </h4>
         )}

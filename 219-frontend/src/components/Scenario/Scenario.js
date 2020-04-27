@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Row, Col } from "shards-react";
+import { Row, Col, ListGroup, ListGroupItem } from "shards-react";
+import "./Scenario.css";
+import "../Quiz/Quiz.css";
 
 export default class Participants extends Component {
   constructor(props) {
@@ -32,11 +34,27 @@ export default class Participants extends Component {
         <Row>
           <Col md="2" />
           <Col md="8">
-            <text>
-              The company is launching a new internal product which will let
-              employees log into the company portal from home and let them work
-              on a secure network?
-            </text>
+            <ListGroup>
+              <ListGroupItem className="hide">
+                <h5 style={{ color: "white" }}>
+                  1. The company is launching a new internal product which will
+                  let employees log into the company portal from home and let
+                  them work on a secure network?
+                </h5>
+              </ListGroupItem>
+              <ListGroupItem className="hide">
+                <h5 style={{ color: "white" }}>option 1</h5>
+              </ListGroupItem>
+              <ListGroupItem className="hide">
+                <h5 style={{ color: "white" }}>option 2</h5>
+              </ListGroupItem>
+              <ListGroupItem className="hide">
+                <h5 style={{ color: "white" }}>option 3</h5>
+              </ListGroupItem>
+              <ListGroupItem className="hide">
+                <h5 style={{ color: "white" }}>option 4</h5>
+              </ListGroupItem>
+            </ListGroup>
           </Col>
           <Col md="2" />
         </Row>
