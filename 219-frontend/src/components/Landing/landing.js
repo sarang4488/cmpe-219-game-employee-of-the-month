@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "shards-react";
-// import Speech from "react-speech";
+import Speech from 'speak-tts'
 
 import "./landing.css";
 
@@ -9,9 +9,21 @@ export default class Main extends Component {
   //   <Speech text="Welcome to react speech" />;
   // }
 
-  // componentDidMount() {
-  //   <Speech text="Welcome to react speech" />;
-  // }
+  componentDidMount() {
+    const speech = new Speech() // will throw an exception if not browser supported
+    if (speech.hasBrowserSupport()) { // returns a boolean
+      console.log("speech synthesis supported")
+    }
+    speech.init().then((data) => {
+      // The "data" object contains the list of available voices and the voice synthesis params
+      console.log("Speech is ready, voices are available", data)
+      speech.speak({
+        text: 'Welcome to Employee of the month. Click play button to start the game',
+      })
+    }).catch(e => {
+      console.error("An error occured while initializing : ", e)
+    })
+  }
 
   render() {
     return (

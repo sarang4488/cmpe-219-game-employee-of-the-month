@@ -2,3 +2,11 @@
   color: black;
   font-weight: bold;
 }
+
+.option {
+  border: 1px solid white !important;
+  border-radius: 5px !important;
+  background: transparent !important;
+  cursor: pointer;
+  margin-bottom: 10px !important;
+}

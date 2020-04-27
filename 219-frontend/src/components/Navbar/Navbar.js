@@ -35,13 +35,14 @@ export default class Main extends Component {
   }
 
   render() {
+    let { timer } = this.props
     return (
       <>
         <Navbar type="dark" theme="primary" expand="md">
           <Collapse open={this.state.collapseOpen} navbar>
             <Nav navbar className="ml-auto">
               <NavItem>
-                <Timer />
+                <Timer timer={timer} />
                 {""}
               </NavItem>
             </Nav>

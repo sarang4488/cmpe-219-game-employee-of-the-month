@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, ListGroup, ListGroupItem } from "shards-react";
+import { Row, Col, ListGroup, ListGroupItem, Button } from "shards-react";
 import "./Scenario.css";
 import "../Quiz/Quiz.css";
 
@@ -19,6 +19,7 @@ export default class Participants extends Component {
   }
 
   render() {
+    let { question, answer, options, showOptions, selectedOption, handleAnswer } = this.props
     return (
       <>
         <Row>
@@ -26,7 +27,7 @@ export default class Participants extends Component {
           <Col md="4">
             <img
               src={require("../../assets/images/newProduct.jpeg")}
-              class="center"
+              className="center"
             />
           </Col>
           <Col md="4" />
@@ -34,30 +35,42 @@ export default class Participants extends Component {
         <Row>
           <Col md="2" />
           <Col md="8">
-            <ListGroup>
-              <ListGroupItem className="hide">
-                <h5 style={{ color: "white" }}>
-                  1. The company is launching a new internal product which will
-                  let employees log into the company portal from home and let
-                  them work on a secure network?
-                </h5>
-              </ListGroupItem>
-              <ListGroupItem className="hide">
-                <h5 style={{ color: "white" }}>option 1</h5>
-              </ListGroupItem>
-              <ListGroupItem className="hide">
-                <h5 style={{ color: "white" }}>option 2</h5>
-              </ListGroupItem>
-              <ListGroupItem className="hide">
-                <h5 style={{ color: "white" }}>option 3</h5>
-              </ListGroupItem>
-              <ListGroupItem className="hide">
-                <h5 style={{ color: "white" }}>option 4</h5>
-              </ListGroupItem>
-            </ListGroup>
+            <ListGroupItem className="hide">
+              <h5 style={{ color: "white" }}>
+                {question}
+              </h5>
+            </ListGroupItem>
+            <ul style={{listStyleType: 'none', padding: '0'}}>
+              {
+                showOptions ?
+                  options.map((option, i) => {
+                    let theme = "light"
+                    if (selectedOption === option) {
+                      if (selectedOption === answer) theme = 'success'
+                      else theme = 'danger'
+                    }
+                    return <li>
+                      <Button
+                        outline={theme === 'light'}
+                        theme={theme}
+                        disabled={selectedOption !== null}
+                        onClick={() => handleAnswer(option)}
+                        style={{ width: '100%', marginBottom: "10px" }}
+                      >
+                        <h5 style={{ color: "white", margin: 0 }}>{option}</h5>
+                      </Button>
+                    </li>
+                  })
+                  : null
+              }
+            </ul>
+
+
           </Col>
           <Col md="2" />
+
         </Row>
+
       </>
     );
   }

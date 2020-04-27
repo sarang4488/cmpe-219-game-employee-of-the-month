@@ -29,21 +29,25 @@ export default class Participants extends Component {
     };
   }
   render() {
+    let { players } = this.props
+    console.log('players', players)
+    let keys = Object.keys(players)
+    keys.sort((a, b) => players[b].score - players[a].score)
     return (
       <>
         <ListGroup>
-          {this.state.players.map((player, index) => (
-            <ListGroupItem key={index} className="hide">
+          {keys.map(key => {
+            let player = players[key]
+            return <ListGroupItem key={key}>
               <Avatar
                 name={player.name}
                 size={50}
                 round="50px"
                 style={{ marginRight: "20px" }}
               />{" "}
-              {"Points: "}
-              {player.score}
+              {`${player.name}: ${player.score}`}
             </ListGroupItem>
-          ))}
+          })}
         </ListGroup>
       </>
     );

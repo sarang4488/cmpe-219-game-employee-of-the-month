@@ -9,25 +9,43 @@ const io = require('socket.io')(server);
 let playersData = {}
 
 io.on('connection', (socket) => {
+    console.log("hello")
+
     socket.join('quiz')
     let id = socket.id
-    playersData.id = {
-        score: 0
+    let leader = Object.keys(playersData).length === 0
+    playersData[id] = {
+        score: 0,
+        leader
     }
-    socket.to('quiz').emit('playersData', playersData)
+    const broadcastPlayersData = () => {
+        io.in('quiz').emit('playersData', playersData)
+    }
+
+    broadcastPlayersData()
 
     socket.on('changeName', (name) => {
-        playersData.id.name = name
-        socket.to('quiz').emit('nameChanged', { id, name })
+        console.log("changeName", name)
+        playersData[id].name = name
+        broadcastPlayersData()
     })
 
-    socket.on('score', (score) => {
-        playersData.id.score += score
-        socket.to('quiz').emit('scoreUpdated', { id, score })
+    socket.on('updateScore', (score) => {
+        console.log("updateScore", score)
+        playersData[id].score += score
+        broadcastPlayersData()
+    })
+
+    socket.on('startGame', () => {
+        console.log("startGame")
+        io.in('quiz').emit('gameStarted')
     })
 
     socket.on('disconnect', () => {
-        io.to('quiz').emit('disconnect', { id })
+        console.log('disconnected', playersData[id])
+        socket.leave('quiz')
+        delete playersData[id]
+        broadcastPlayersData()
     })
 });
 

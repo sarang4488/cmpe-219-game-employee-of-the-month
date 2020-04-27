@@ -8,32 +8,22 @@ import {
   FormInput
 } from "shards-react";
 import Avatar from "react-avatar";
-import "./room.css";
+import socketIOClient from "socket.io-client";
+import Notifications, { notify } from 'react-notify-toast';
+import "./room.css"
+
+const ENDPOINT = "http://127.0.0.1:4001";
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
       playerName: "",
-      players: [
-        {
-          name: "Sarang Grover",
-          score: 0
-        },
-        {
-          name: "Jay Patel",
-          score: 0
-        },
-        {
-          name: "Bhaskar Gurram",
-          score: 0
-        },
-        {
-          name: "Atul Gutal",
-          score: 0
-        }
-      ]
+      joinedRoom: false,
+      playerId: null,
+      players: [],
     };
+    this.socket = null
   }
 
   handleChange = async e => {
@@ -42,25 +32,81 @@ export default class Main extends Component {
     });
   };
 
-  handleSubmit = async e => {
-    e.preventDefault();
+  handleGetPlayersData = (players) => {
+    this.setState({
+      players
+    })
+  }
 
-    await this.setState({
-      players: [
-        ...this.state.players,
-        { name: this.state.playerName, score: 0 }
-      ]
-    });
+  handleConnect = () => {
+    this.setState({
+      playerId: this.socket.id
+    })
+  }
+
+  handleGameStarted = () => {
+    let { playerId, players } = this.state
+    this.props.history.push({
+      pathname: '/quiz',
+      socket: this.socket,
+      playerId,
+      players
+    })
+  }
+
+  handleJoinRoom = async (e) => {
+    e.preventDefault();
+    let { playerName } = this.state
+    if (!playerName) {
+      return notify.show('Please enter you name!', 'error');
+    }
+    const socket = socketIOClient(ENDPOINT);
+    this.socket = socket
+
+    socket.on('connect', this.handleConnect)
+
+    this.setState({
+      joinedRoom: true,
+    })
+
+
+    socket.emit('changeName', playerName)
+
+    socket.on('playersData', this.handleGetPlayersData)
+
+    socket.on('gameStarted', this.handleGameStarted)
+
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
+
+  componentWillUnmount() {
+    this.socket.off('playersData', this.handleGetPlayersData)
+    this.socket.off('connect', this.handleConnect)
+    this.socket.off('gameStarted', this.handleGameStarted)
+  }
+
+  handleStartGame = () => {
+    this.socket.emit("startGame")
+  }
+
+  handleChangeName = () => {
+    let { playerName } = this.state
+    if (!playerName) {
+      return notify.show('Please enter you name!', 'error');
+    }
+    this.socket.emit('changeName', playerName)
+  }
 
   render() {
+    const { joinedRoom, players, playerId } = this.state
+    console.log('players', players, joinedRoom)
     return (
       <Container
         className="dr-example-container"
         style={{ margin: "0px", padding: "0px" }}
       >
+        <Notifications />
         <div className="background">
           <Row>
             <Col lg="5"></Col>
@@ -89,15 +135,20 @@ export default class Main extends Component {
           </Row>
           <Row>
             <Col lg="6"></Col>
+
             <Col lg="2">
               {" "}
+
               <Button
                 pill
                 style={{ marginTop: "5px" }}
                 theme="primary"
-                onClick={this.handleSubmit}
+                onClick={!joinedRoom ? this.handleJoinRoom : this.handleChangeName}
               >
-                Join Room
+                {
+                  !joinedRoom ? "Join Room" : "Change Name"
+                }
+
               </Button>
             </Col>
           </Row>
@@ -108,19 +159,27 @@ export default class Main extends Component {
               <div
                 style={{ fontSize: "28px", marginTop: "5px", color: "white" }}
               >
-                Players already joined:
+                Players already joined room:
               </div>
               <br />
-              {this.state.players.map(player => {
-                return (
-                  <Avatar
-                    name={player.name}
-                    size={100}
-                    round="100px"
-                    style={{ marginRight: "20px" }}
-                  />
-                );
-              })}
+              <Row>
+                {Object.keys(players).map(key => {
+                  let player = players[key]
+                  return (
+                    <Col lg="2" key={key} style={{ textAlign: 'center' }}>
+                      <Avatar
+                        name={player.name}
+                        size={100}
+                        round="100px"
+                      />
+                      <h6 style={{ color: "white", marginTop: "5px" }}>
+                        {player.name}
+                      </h6>
+                    </Col>
+                  );
+                })}
+              </Row>
+
             </Col>
           </Row>
           <br />
@@ -131,8 +190,9 @@ export default class Main extends Component {
               <ButtonGroup size="lg">
                 <Button
                   theme="success"
-                  onClick={() => this.props.history.push("/quiz")}
+                  onClick={this.handleStartGame}
                   style={{ marginLeft: "40px" }}
+                  disabled={!Object.keys(players).length || (players && players[playerId] && !players[playerId].leader)}
                 >
                   Start Game
                 </Button>

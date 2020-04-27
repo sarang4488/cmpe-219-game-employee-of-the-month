@@ -11,7 +11,7 @@ export default class Main extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/" component={Landing} exact={true} />
-          <Route path="/room" component={Room} />
+          <Route path="/room" component={Room} exact={true} />
           <Route path="/quiz" component={Quiz} />
         </Switch>
       </BrowserRouter>
