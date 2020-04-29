@@ -1,10 +1,17 @@
 .background {
-    background-image: url("../../assets/images/laptop-secure.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 900px;
-    width: 130%;
-    margin: 0px;
-    padding: 0px;
-  }
+  background-image: url("../../assets/images/laptop-secure.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 900px;
+  width: 130%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.resultsbackground {
+  background-image: url("../../assets/images/laptop-secure.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
