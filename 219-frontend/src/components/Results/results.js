@@ -155,7 +155,7 @@ export default class Results extends Component {
                   <Button
                     theme="success"
                     style={{ marginLeft: "150px" }}
-                    onClick={() => this.props.history.push("/room")}
+                    onClick={() => this.props.history.push("/")}
                   >
                     Play Again
                   </Button>
