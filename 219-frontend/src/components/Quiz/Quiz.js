@@ -78,7 +78,7 @@ class Quiz extends React.Component {
           this.timerInterval = setInterval(() => {
             console.log("timer")
             let { timer, curQuestionIdx, quizQuestions, players, playerId } = this.state
-            if (timer === 10) { // timer ends
+            if (timer === 30) { // timer ends
               clearInterval(this.timerInterval)
               if (curQuestionIdx === quizQuestions.length - 1) {
                 // go to results page
