@@ -23,24 +23,7 @@ export default class Results extends Component {
       playerName: "",
       joinedRoom: false,
       playerId: null,
-      players: [
-        {
-          name: "Sarang Grover",
-          score: 350,
-        },
-        {
-          name: "Atul Gutal",
-          score: 300,
-        },
-        {
-          name: "Bhaskar Gurram",
-          score: 250,
-        },
-        {
-          name: "Jay Patel",
-          score: 200,
-        },
-      ],
+      players: [],
     };
     this.socket = null;
   }
@@ -73,51 +56,18 @@ export default class Results extends Component {
     });
   };
 
-  handleJoinRoom = async (e) => {
-    e.preventDefault();
-    let { playerName } = this.state;
-    if (!playerName) {
-      return notify.show("Please enter you name!", "error");
-    }
-    const socket = socketIOClient(ENDPOINT);
-    this.socket = socket;
-
-    socket.on("connect", this.handleConnect);
-
+  componentDidMount() {
+    let { location: { players } } = this.props
     this.setState({
-      joinedRoom: true,
-    });
-
-    socket.emit("changeName", playerName);
-
-    socket.on("playersData", this.handleGetPlayersData);
-
-    socket.on("gameStarted", this.handleGameStarted);
-  };
-
-  componentDidMount() {}
-
-  componentWillUnmount() {
-    this.socket.off("playersData", this.handleGetPlayersData);
-    this.socket.off("connect", this.handleConnect);
-    this.socket.off("gameStarted", this.handleGameStarted);
+      players
+    })
   }
 
-  handleStartGame = () => {
-    this.socket.emit("startGame");
-  };
-
-  handleChangeName = () => {
-    let { playerName } = this.state;
-    if (!playerName) {
-      return notify.show("Please enter you name!", "error");
-    }
-    this.socket.emit("changeName", playerName);
-  };
 
   render() {
-    const { joinedRoom, players, playerId } = this.state;
-    console.log("players", players, joinedRoom);
+    const { players } = this.state;
+    let keys = Object.keys(players)
+    keys.sort((a, b) => players[b].score - players[a].score)
     return (
       <React.Fragment>
         <div className="resultsbackground" style={{ height: "1000px" }}>
@@ -136,10 +86,11 @@ export default class Results extends Component {
                 >
                   Leader Board
                 </ListGroupItem>
-                {this.state.players.map((player,i) => {
+                {keys.map((key, i) => {
+                  let player = players[key]
                   return (
                     <ListGroupItem key={player.name}
-                    style={{}}>
+                      style={{}}>
                       <Avatar
                         name={player.name}
                         size={50}
@@ -155,7 +106,7 @@ export default class Results extends Component {
                   <Button
                     theme="success"
                     style={{ marginLeft: "150px" }}
-                    onClick={() => this.props.history.push("/")}
+                    onClick={() => window.location.href = "/"}
                   >
                     Play Again
                   </Button>

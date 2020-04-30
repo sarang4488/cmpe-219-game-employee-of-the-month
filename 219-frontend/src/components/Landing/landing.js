@@ -8,12 +8,17 @@ export default class Main extends Component {
   // constructor() {
   //   <Speech text="Welcome to react speech" />;
   // }
+  constructor() {
+    super()
+    this.speech = null
+  }
 
   componentDidMount() {
     const speech = new Speech() // will throw an exception if not browser supported
     if (speech.hasBrowserSupport()) { // returns a boolean
       console.log("speech synthesis supported")
     }
+    this.speech = speech
     speech.init().then((data) => {
       // The "data" object contains the list of available voices and the voice synthesis params
       console.log("Speech is ready, voices are available", data)
@@ -23,6 +28,10 @@ export default class Main extends Component {
     }).catch(e => {
       console.error("An error occured while initializing : ", e)
     })
+  }
+
+  componenetWillUnmount() {
+    this.speech.cancel()
   }
 
   render() {
@@ -41,7 +50,10 @@ export default class Main extends Component {
                 pill
                 theme="success"
                 className="playButton"
-                onClick={() => this.props.history.push("/room")}
+                onClick={() => {
+                  this.speech.cancel()
+                  this.props.history.push("/room")
+                }}
               >
                 Play
               </Button>

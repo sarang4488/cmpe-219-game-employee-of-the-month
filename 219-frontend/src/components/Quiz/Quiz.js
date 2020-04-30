@@ -5,26 +5,60 @@ import Timer from "../Timer/Timer";
 import Participants from "../Participants/Participants";
 import Scenario from "../Scenario/Scenario";
 
+import launch from "../../assets/images/launch.png";
+import install from "../../assets/images/install.jpg";
+import network from "../../assets/images/network.png";
+import phishing from '../../assets/images/phishing.png';
+import data from '../../assets/images/data.png';
+import friend from '../../assets/images/friend.png';
+
 class Quiz extends React.Component {
 
   state = {
     timer: 0,
+    // quizQuestions: [{
+    //   question: "abc",
+    //   options: ['Multi factor authentication', 'HTTP Basic Authentication', 'Biometrics Authentication', 'OAuth Authentication'],
+    //   answer: 'Multi factor authentication',
+    //   image: launch
+    // },],
     quizQuestions: [
       {
-        question: "Name the three countries in the world that begin with the letter F",
-        options: ['o1', 'o2', 'o3', 'o4'],
-        answer: 'o1'
+        question: "The company is launching a new internal product which will let employees log into the company portal from home and let them work on a secure network Which authentication protocol should the company implement considering the sensitive information that employees can access?",
+        options: ['Multi factor authentication', 'HTTP Basic Authentication', 'Biometrics Authentication', 'OAuth Authentication'],
+        answer: 'Multi factor authentication',
+        image: launch
       },
       {
-        question: "What is the longest river in Britain?",
-        options: ['o1', 'o2', 'o3', 'o4'],
-        answer: 'o2'
+        question: "You are trying to install a software on your office computer, but the antivirus is blocking your installation What should you do?",
+        options: ['You need to contact your IT help desk or Information Security team.', 'Try to disable Antivirus  and install the software.', 'Look for alternatives to the software or contact your manager.', 'None of the above'],
+        answer: 'You need to contact your IT help desk or Information Security team.',
+        image: install
       },
       {
-        question: "What city has the busiest airport in the world?",
-        options: ['o1', 'o2', 'o3', 'o4'],
-        answer: 'o3'
-      }
+        question: "You have opened an email originated outside the company’s network containing a web link and now your computer is behaving strangely What course of action should you take next?",
+        options: ['The purpose of a firewall and security software is to block malicious code getting into your computer in the first place so no action is needed.', 'You need to update and run your antivirus software.', 'You need to contact your IT help desk or Information Security team.', 'Keep an eye on the performance of your computer.'],
+        answer: 'You need to contact your IT help desk or Information Security team.',
+        image: network
+      },
+      {
+        question: "You have received an email from a person stating to be from your client What is the best way to validate whether it is a legitimate email or a phishing email?",
+        options: ['Bad spelling, poor syntax, and grammar are one of the tell-tale signs of a fake email.', 'Look at the email headers to see where it really came from.', 'Look for poorly replicated logos.', 'Contact the sender on some other medium besides email to verify whether they sent you the email.'],
+        answer: 'Contact the sender on some other medium besides email to verify whether they sent you the email.',
+        image: phishing
+      },
+      {
+        question: "You are in a cafe, doing office work What steps do you need to take to protect data?",
+        options: ['Connect to companies VPN.', 'Always make sure that no one is looking at your computer screen while youre typing passwords.', 'All of the above', 'None of the above'],
+        answer: 'All of the above',
+        image: data
+      },
+      {
+        question: "You have a friend who's visiting your company as a visitor during lunch time, he asks you for wifi password",
+        options: ['You should allow your friend to access the company’s network, as you know him.', 'Say no, as company privacy is more important.', "Contact the front desk and try to get access to the company's guest Wifi.", 'None of the above'],
+        answer: "Contact the front desk and try to get access to the company's guest Wifi.",
+        image: friend
+      },
     ],
     curQuestionIdx: 0,
     selectedOption: null,
@@ -130,7 +164,7 @@ class Quiz extends React.Component {
   render() {
     const { quizQuestions, curQuestionIdx, timer, showOptions, selectedOption, players } = this.state
     let curQuestion = quizQuestions[curQuestionIdx]
-    let { question, options, answer } = curQuestion
+    let { question, options, answer, image } = curQuestion
     return (
       <div className="backgroundImage">
         <Row>
@@ -156,7 +190,7 @@ class Quiz extends React.Component {
               selectedOption={selectedOption}
               options={options}
               handleAnswer={this.handleAnswer}
-
+              image={image}
             />
           </Col>
         </Row>
