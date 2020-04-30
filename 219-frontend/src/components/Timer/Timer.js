@@ -7,7 +7,7 @@ export default class Timer extends Component {
     return (
       <div>
         <h4 style={{ color: "white", marginTop: "10px" }}>
-          Time Remaining: {30 - timer}
+          Time Remaining: {timer}
         </h4>
       </div>
     );

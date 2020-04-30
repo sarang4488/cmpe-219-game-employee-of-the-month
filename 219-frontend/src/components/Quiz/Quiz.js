@@ -15,7 +15,7 @@ import friend from '../../assets/images/friend.png';
 class Quiz extends React.Component {
 
   state = {
-    timer: 0,
+    timer: 20,
     // quizQuestions: [{
     //   question: "abc",
     //   options: ['Multi factor authentication', 'HTTP Basic Authentication', 'Biometrics Authentication', 'OAuth Authentication'],
@@ -78,7 +78,7 @@ class Quiz extends React.Component {
           this.timerInterval = setInterval(() => {
             console.log("timer")
             let { timer, curQuestionIdx, quizQuestions, players, playerId } = this.state
-            if (timer === 30) { // timer ends
+            if (timer === 0) { // timer ends
               clearInterval(this.timerInterval)
               if (curQuestionIdx === quizQuestions.length - 1) {
                 // go to results page
@@ -91,7 +91,7 @@ class Quiz extends React.Component {
                 return
               }
               this.setState({
-                timer: 0,
+                timer: 20,
                 curQuestionIdx: curQuestionIdx + 1,
                 showOptions: false,
                 selectedOption: null
@@ -100,7 +100,7 @@ class Quiz extends React.Component {
               return
             }
             this.setState({
-              timer: this.state.timer + 1
+              timer: this.state.timer - 1
             })
 
           }, 1000)
@@ -144,7 +144,7 @@ class Quiz extends React.Component {
     if (selectedOption !== null) return
     this.setState({ selectedOption: option }, () => {
       if (option === quizQuestions[curQuestionIdx].answer) {
-        this.socket.emit('updateScore', (30 - timer) * 10)
+        this.socket.emit('updateScore', (timer) * 10)
         this.speech.speak({
           text: "Right Answer"
         })
