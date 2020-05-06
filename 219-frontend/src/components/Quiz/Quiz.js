@@ -5,7 +5,7 @@ import Timer from "../Timer/Timer";
 import Participants from "../Participants/Participants";
 import Scenario from "../Scenario/Scenario";
 
-import launch from "../../assets/images/launch.png";
+import launch from "../../assets/images/launch.jpeg";
 import install from "../../assets/images/install.jpg";
 import network from "../../assets/images/network.png";
 import phishing from '../../assets/images/phishing.png';
