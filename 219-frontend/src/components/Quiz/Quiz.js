@@ -30,25 +30,25 @@ class Quiz extends React.Component {
         image: launch
       },
       {
-        question: "You are trying to install software on your office computer, but the antivirus is blocking your installation. What you should do?",
+        question: "You are trying to install software on your office computer, but the antivirus is blocking your installation, What you should do?",
         options: ['You need to contact your IT help desk or Information Security team.', 'Try to disable Antivirus  and install the software.', 'Look for alternatives to the software or contact your manager.', 'None of the above'],
         answer: 'You need to contact your IT help desk or Information Security team.',
         image: install
       },
       {
-        question: "You have opened  an email originated outside the company’s network containing a web link and now your computer is behaving strangely. What course of action should you take next?",
+        question: "You have opened an email originated outside the company’s network containing a web link and now your computer is behaving strangely, What course of action should you take next?",
         options: ['The purpose of a firewall and security software is to block malicious code getting into your computer in the first place so no action is needed.', 'You need to update and run your antivirus software.', 'You need to contact your IT help desk or Information Security team.', 'Keep an eye on the performance of your computer.'],
         answer: 'You need to contact your IT help desk or Information Security team.',
         image: network
       },
       {
-        question: "you have received an email from a person stating to be from your client. Best way to validate whether it is a legitimate email or a phishing email?",
+        question: "You have received an email from a person stating to be from your client, Best way to validate whether it is a legitimate email or a phishing email?",
         options: ['Bad spelling, poor syntax, and grammar are one of the tell-tale signs of a fake email.', 'Look at the email headers to see where it really came from.', 'Look for poorly replicated logos.', 'Contact the sender on some other medium besides email to verify whether they sent you the email.'],
         answer: 'Contact the sender on some other medium besides email to verify whether they sent you the email.',
         image: phishing
       },
       {
-        question: "You are in a cafe, doing office work. What steps do you need to take to protect data?",
+        question: "You are in a cafe, doing office work, What steps do you need to take to protect data?",
         options: ['Connect to companies VPN.', 'Always make sure that no one is looking at your computer screen while youre typing passwords.', 'All of the above', 'None of the above'],
         answer: 'All of the above',
         image: data
