@@ -56,7 +56,7 @@ export default class Participants extends Component {
                         theme={theme}
                         disabled={selectedOption !== null}
                         onClick={() => handleAnswer(option)}
-                        style={{ width: '100%', marginBottom: "10px" }}
+                        style={{ width: '100%', marginBottom: "10px", textAlign: "left" }}
                       >
                         <h6 style={{ color: "black", margin: 0 }}>{option}</h6>
                       </Button>
